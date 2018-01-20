@@ -24,6 +24,7 @@ func GetFilterDir() (dir string, err error) {
 
 	return filepath.Join(
 		u.HomeDir,
+		"Documents",
 		"My Games",
 		"Path of Exile",
 	), nil
