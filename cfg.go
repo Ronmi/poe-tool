@@ -15,7 +15,7 @@ type ConfigFile struct {
 }
 
 func loadConfig() *ConfigFile {
-	data, err := ioutil.ReadFile("poe-walk.yml")
+	data, err := ioutil.ReadFile("poe-tool.yml")
 	if err != nil {
 		panic(err)
 	}
