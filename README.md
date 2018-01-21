@@ -30,13 +30,15 @@ username: "your pastebin account"
 password: "your pastebin password"
 ```
 
-### Build your own binary
+### Obtain binaries
 
-See [build instructions](https://github.com/Ronmi/poe-tool/blob/master/build.md).
+Build on you own is suggested! See [build instructions](https://github.com/Ronmi/poe-tool/blob/master/build.md).
+
+You may refer to release page to download prebuilt binaries.
 
 ### Run it!
 
-Put the config file along with your binaries, and run `poe-tool.exe`
+Put the config file along with the binaries, and run `poe-tool.exe`
 
 # License
 
