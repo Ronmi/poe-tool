@@ -31,7 +31,7 @@ function inst {
 if [[ $1 == "dep" ]]
 then
     echo "preparing mingw-gtk"
-    if [[ ! -d "${dir}/mingw64" ]]
+    if [[ ! -d "${dir}/mingw64/bin" ]]
     then
 	for x in $pkgs
 	do
