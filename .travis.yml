@@ -4,6 +4,7 @@ go_import_path: github.com/Ronmi/poe-tool
 cache:
   directories:
   - travis/mingw64
+  - vendor
 
 addons:
   apt:
@@ -20,9 +21,10 @@ addons:
 install:
 - go get github.com/golang/dep/cmd/dep
 - dep ensure
+- ./travis.sh dep
 
 script:
-- go test ./...
+- x="gtk_$(dpkg -l|grep libgtk-3-dev|grep -oE '3\.[0-9]+'|sed 's/\./_/')" go test -tags $x -v ./...
 
 before_deploy:
 - ./travis.sh

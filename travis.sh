@@ -28,12 +28,18 @@ function inst {
     curl -sSL "http://repo.msys2.org/mingw/x86_64/${1}-any.pkg.tar.xz" | tar Jxvf - -C travis
 }
 
-if [[ ! -d "${dir}/mingw64" ]]
+if [[ $1 == "dep" ]]
 then
-    for x in $pkgs
-    do
-	inst "$x"
-    done
+    echo "preparing mingw-gtk"
+    if [[ ! -d "${dir}/mingw64" ]]
+    then
+	for x in $pkgs
+	do
+	    inst "$x"
+	done
+    fi
+
+    exit 0
 fi
 
 sed -i "s#prefix=/mingw64#prefix=${dir}/mingw64#" travis/mingw64/lib/pkgconfig/*.pc
