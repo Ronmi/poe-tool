@@ -83,7 +83,7 @@ func mainUi() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "main.ui", size: 8294, mode: os.FileMode(420), modTime: time.Unix(1516455289, 0)}
+	info := bindataFileInfo{name: "main.ui", size: 8294, mode: os.FileMode(420), modTime: time.Unix(1516527218, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

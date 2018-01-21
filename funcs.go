@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"path"
 	"path/filepath"
 
 	"github.com/gotk3/gotk3/gtk"
@@ -171,7 +172,26 @@ func initAction(l Logger, cfg *ConfigFile) {
 		},
 		{
 			Func: func(eventData interface{}) {
-				l.Log(L("not_implemented"))
+				uri := InputURL(l)
+				go func() {
+					l.Logf("URL: %s", uri)
+					dir, err := GetFilterDir()
+					if err != nil {
+						l.Log(LErr(err))
+						return
+					}
+
+					key := path.Base(uri)
+					err = h.dlRemoteFile(dir, remote{
+						Key:  key,
+						Name: key + ".filter",
+					})
+					if err != nil {
+						l.Log(LErr(err))
+						return
+					}
+					l.Log("Done")
+				}()
 			},
 			Key: "btn_import_filter",
 		},
