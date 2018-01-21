@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/Ronmi/pastebin"
   packages = ["."]
-  revision = "d50a74f2ce07c9470c64b4205970a8e3023abdfb"
+  revision = "b596929536482b5b2a4136034e13e98493459887"
 
 [[projects]]
   branch = "master"
@@ -28,6 +28,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "303188d933e7ed10e709aa1d1cc07a22750f5c9de52f7da27d9cf78a8216e6e7"
+  inputs-digest = "ed8a8bc614e2f5fab5258c8cfab3465a94c2bf6e2c622aca14b6f72f95073a76"
   solver-name = "gps-cdcl"
   solver-version = 1

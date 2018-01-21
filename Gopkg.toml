@@ -22,4 +22,12 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/ninedraft/simplepaste"
+  name = "github.com/Ronmi/pastebin"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gotk3/gotk3"
+
+[[constraint]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
