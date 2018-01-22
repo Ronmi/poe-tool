@@ -66,3 +66,23 @@ func InstallTradeMacro() (err error) {
 	_, err = Unzip(fn, dir)
 	return
 }
+
+type TMHandler struct {
+	AbstractHandler
+}
+
+func (h *TMHandler) Handle(data interface{}) {
+	h.l.Log(L("dling_trademacro"))
+	go func() {
+		err := InstallTradeMacro()
+		if err != nil {
+			h.l.Log(LErr(err))
+		} else {
+			h.l.Log(L("finish_trademacro"))
+		}
+	}()
+}
+
+func (h *TMHandler) Key() string {
+	return "btn_inst_trademacro"
+}

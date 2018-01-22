@@ -60,3 +60,49 @@ func Caps2Ctrl() error {
 func RestoreCaps() error {
 	return exec.Command("uncap.exe", "-k").Run()
 }
+
+type UncapHandler struct {
+	AbstractHandler
+}
+
+func (h *UncapHandler) Handle(data interface{}) {
+	h.l.Log(L("btn_caps2ctrl"))
+	go func() {
+		if err := InstallUncap(); err != nil {
+			h.l.Log(LErr(err))
+			return
+		}
+		if err := Caps2Ctrl(); err != nil {
+			h.l.Log(LErr(err))
+			return
+		}
+		h.l.Log(L("bind_caps"))
+	}()
+}
+
+func (h *UncapHandler) Key() string {
+	return "btn_caps2ctrl"
+}
+
+type RecapHandler struct {
+	AbstractHandler
+}
+
+func (h *RecapHandler) Handle(data interface{}) {
+	h.l.Log(L("btn_restore_caps"))
+	go func() {
+		if err := InstallUncap(); err != nil {
+			h.l.Log(LErr(err))
+			return
+		}
+		if err := RestoreCaps(); err != nil {
+			h.l.Log(LErr(err))
+			return
+		}
+		h.l.Log(L("restore_caps"))
+	}()
+}
+
+func (h *RecapHandler) Key() string {
+	return "btn_restore_caps"
+}

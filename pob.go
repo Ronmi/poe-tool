@@ -47,3 +47,23 @@ func InstallPoB() (err error) {
 	_, err = Unzip(fn, dir)
 	return
 }
+
+type POBHandler struct {
+	AbstractHandler
+}
+
+func (h *POBHandler) Handle(data interface{}) {
+	h.l.Log(L("dling_pob"))
+	go func() {
+		err := InstallPoB()
+		if err != nil {
+			h.l.Log(LErr(err))
+		} else {
+			h.l.Log(L("finish_pob"))
+		}
+	}()
+}
+
+func (h *POBHandler) Key() string {
+	return "btn_inst_pob"
+}
