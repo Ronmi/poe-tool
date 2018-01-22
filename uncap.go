@@ -36,7 +36,7 @@ func fetchUncapURL() (uri string, err error) {
 		return
 	}
 
-	return string(ret), nil
+	return "https://github.com/susam/uncap/releases" + string(ret), nil
 }
 
 func InstallUncap() (err error) {
