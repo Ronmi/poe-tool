@@ -46,7 +46,6 @@ sed -i "s#prefix=/mingw64#prefix=${dir}/mingw64#" travis/mingw64/lib/pkgconfig/*
 
 go build -v -ldflags="-H=windowsgui"
 
-mv poe-tool.exe "$deploy"
 cp poe-tool.yml "$deploy"
 
 dlls="libatk-1.0-0.dll libgdk-3-0.dll libpangocairo-1.0-0.dll \
@@ -66,4 +65,5 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
-tar czf poe-tool.tar.gz -C "$deploy" --exclude=.gitignore .
+tar czf poe-tool.tar.gz poe-tool.exe
+tar czf resources.tar.gz -C "$deploy" --exclude=.gitignore .

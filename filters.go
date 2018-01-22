@@ -4,6 +4,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"os/user"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -206,4 +207,132 @@ func (h *filterHnd) UploadFilters(dir string) (ch chan DLState) {
 	}(ch)
 
 	return
+}
+
+type DLFHandler struct {
+	AbstractHandler
+	h *filterHnd
+}
+
+func (h *DLFHandler) Init(l Logger, cfg *ConfigFile) {
+	h.AbstractHandler.Init(l, cfg)
+	h.h = FilterHnd(cfg)
+}
+
+func (h *DLFHandler) Handle(data interface{}) {
+	go func(l Logger, h *filterHnd) {
+		dir, err := GetFilterDir()
+		if err != nil {
+			l.Log(LErr(err))
+			return
+		}
+
+		ch := h.DownloadFilters(dir)
+		for x := range ch {
+			if x.Filename == "" {
+				l.Log(LErr(x.Err))
+				continue
+			}
+			fn := filepath.Base(x.Filename)
+
+			if !x.Finished {
+				l.Logf(L("log_state_begin"), fn)
+				continue
+			}
+
+			if x.Err == nil {
+				l.Logf(L("log_state_ok"), x.Key, fn)
+				continue
+			}
+
+			l.Logf(L("log_state_fail"), fn, x.Err)
+		}
+	}(h.l, h.h)
+}
+
+func (h *DLFHandler) Key() string {
+	return "btn_download_filters"
+}
+
+type ULFHandler struct {
+	AbstractHandler
+	h *filterHnd
+}
+
+func (h *ULFHandler) Init(l Logger, cfg *ConfigFile) {
+	h.AbstractHandler.Init(l, cfg)
+	h.h = FilterHnd(cfg)
+}
+
+func (h *ULFHandler) Handle(data interface{}) {
+	go func(l Logger, h *filterHnd) {
+		dir, err := GetFilterDir()
+		if err != nil {
+			l.Log(LErr(err))
+			return
+		}
+
+		ch := h.UploadFilters(dir)
+		for x := range ch {
+			if x.Filename == "" {
+				l.Log(LErr(x.Err))
+				continue
+			}
+
+			fn := filepath.Base(x.Filename)
+
+			if !x.Finished {
+				l.Logf(L("log_state_begin"), fn)
+				continue
+			}
+
+			if x.Err == nil {
+				l.Logf(L("log_state_ok"), fn, x.Key)
+				continue
+			}
+
+			l.Logf(L("log_state_fail"), fn, x.Err)
+		}
+	}(h.l, h.h)
+}
+
+func (h *ULFHandler) Key() string {
+	return "btn_upload_filters"
+}
+
+type ImportHandler struct {
+	AbstractHandler
+	h *filterHnd
+}
+
+func (h *ImportHandler) Init(l Logger, cfg *ConfigFile) {
+	h.AbstractHandler.Init(l, cfg)
+	h.h = FilterHnd(cfg)
+}
+
+func (h *ImportHandler) Handle(data interface{}) {
+	uri := InputURL(h.l)
+	go func(l Logger, h *filterHnd) {
+		l.Logf("URL: %s", uri)
+		dir, err := GetFilterDir()
+		if err != nil {
+			l.Log(LErr(err))
+			return
+		}
+
+		key := path.Base(uri)
+		err = h.dlRemoteFile(dir, remote{
+			Key:  key,
+			Name: key + ".filter",
+		})
+		if err != nil {
+			l.Log(LErr(err))
+			return
+		}
+		l.Log("Done")
+	}(h.l, h.h)
+}
+
+func (h *ImportHandler) Key() string {
+	return "btn_import_filter"
 }
