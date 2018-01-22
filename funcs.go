@@ -81,6 +81,7 @@ func initAction(l Logger, cfg *ConfigFile) {
 		},
 		{
 			Func: async(func(eventData interface{}) {
+				l.Log(L("btn_caps2ctrl"))
 				if err := InstallUncap(); err != nil {
 					l.Log(LErr(err))
 					return
@@ -95,6 +96,7 @@ func initAction(l Logger, cfg *ConfigFile) {
 		},
 		{
 			Func: async(func(eventData interface{}) {
+				l.Log(L("btn_restore_caps"))
 				if err := InstallUncap(); err != nil {
 					l.Log(LErr(err))
 					return
