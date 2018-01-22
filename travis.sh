@@ -47,6 +47,7 @@ sed -i "s#prefix=/mingw64#prefix=${dir}/mingw64#" travis/mingw64/lib/pkgconfig/*
 go build -v -ldflags="-H=windowsgui"
 
 mv poe-tool.exe "$deploy"
+cp poe-tool.yml "$deploy"
 
 dlls="libatk-1.0-0.dll libgdk-3-0.dll libpangocairo-1.0-0.dll \
 libbz2-1.dll libgio-2.0-0.dll libpangoft2-1.0-0.dll \
