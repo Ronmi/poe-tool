@@ -1,3 +1,5 @@
+// +build windows
+
 package main
 
 import (
@@ -5,17 +7,11 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
-	"regexp"
+
+	"golang.org/x/sys/windows/registry"
 )
-
-var reGithubURL *regexp.Regexp
-
-func init() {
-	reGithubURL = regexp.MustCompile(
-		`/download/[a-zA-Z0-9./-]+\.zip`,
-	)
-}
 
 func fetchTradeMacroURL() (uri string, err error) {
 	urlTradeMacro := "https://github.com/POE-TradeMacro/POE-TradeMacro/releases/latest"
@@ -39,48 +35,84 @@ func fetchTradeMacroURL() (uri string, err error) {
 	return "https://github.com/POE-TradeMacro/POE-TradeMacro/releases" + string(ret), nil
 }
 
-func installAHK() (err error) {
-	uri := "https://autohotkey.com/download/ahk-install.exe"
-	fn := "ahk-install.exe"
-	return DL(uri, fn)
-}
-
-func InstallTradeMacro() (err error) {
-	if err = installAHK(); err != nil {
-		return
-	}
-
-	dir := filepath.Join(".", "POE-TradeMacro")
-	fn := "poe_trademacro.zip"
-
-	uri, err := fetchTradeMacroURL()
-	if err != nil {
-		return
-	}
-
-	if err = DL(uri, fn); err != nil {
-		return
-	}
-	defer os.Remove(fn)
-
-	_, err = Unzip(fn, dir)
-	return
+func init() {
+	Handlers = append(Handlers, &TMHandler{})
 }
 
 type TMHandler struct {
 	AbstractHandler
+	ahkPath string
+}
+
+func (h *TMHandler) installAHK() (ok bool) {
+	h.l.Log(L("detect_ahk"))
+
+	k, err := registry.OpenKey(
+		registry.LOCAL_MACHINE,
+		`SOFTWARE\AutoHotkey`,
+		registry.QUERY_VALUE)
+	if err == nil {
+		if s, _, err := k.GetStringValue("InstallDir"); err == nil {
+			h.ahkPath = s
+			h.l.Logf(L("ahk_path"), s)
+			return
+		}
+	}
+
+	h.l.Log(L("try_dl_ahk"))
+	uri := "https://autohotkey.com/download/ahk-install.exe"
+	fn := "ahk-install.exe"
+	if err := DL(uri, fn); err != nil {
+		h.l.Log(L("err_dl_ahk"))
+		return
+	}
+
+	h.l.Log(L("inst_ahk"))
+	exec.Command(fn).Run()
+	return true
+}
+
+func (h *TMHandler) InstallTradeMacro() {
+	if !h.installAHK() {
+		return
+	}
+
+	dir := filepath.Join(".", "POE-TradeMacro")
+	tm := filepath.Join(dir, "Run_TradeMacro.ahk")
+
+	if _, err := os.Stat(tm); err != nil {
+		fn := "poe_trademacro.zip"
+		// not found, download it
+		h.l.Log(L("dling_trademacro"))
+
+		uri, err := fetchTradeMacroURL()
+		if err != nil {
+			h.l.Log(L("err_dl_tm"))
+			return
+		}
+
+		if err = DL(uri, fn); err != nil {
+			h.l.Log(L("err_dl_tm"))
+			return
+		}
+		defer os.Remove(fn)
+
+		if _, err = Unzip(fn, dir); err != nil {
+			h.l.Log(L("err_dl_tm"))
+			return
+		}
+
+		h.l.Log(L("finish_trademacro"))
+	}
+
+	ahk := filepath.Join(h.ahkPath, "AutoHotkey.exe")
+
+	exec.Command(ahk, tm).Start()
+	h.l.Log(L("tm_executed"))
 }
 
 func (h *TMHandler) Handle(data interface{}) {
-	h.l.Log(L("dling_trademacro"))
-	go func() {
-		err := InstallTradeMacro()
-		if err != nil {
-			h.l.Log(LErr(err))
-		} else {
-			h.l.Log(L("finish_trademacro"))
-		}
-	}()
+	go h.InstallTradeMacro()
 }
 
 func (h *TMHandler) Key() string {

@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	Handlers []ButtonHandler
+	Handlers []ButtonHandler = []ButtonHandler{}
 )
 
 func switchLocale(lang string) {
@@ -18,18 +18,6 @@ func switchLocale(lang string) {
 }
 
 func initAction(l Logger, cfg *ConfigFile) {
-	Handlers = []ButtonHandler{
-		&ImportHandler{},
-		&DLFHandler{},
-		&ULFHandler{},
-		&UncapHandler{},
-		&RecapHandler{},
-		&POBHandler{},
-		&TMHandler{},
-		&LangTWHandler{},
-		&LangENHandler{},
-	}
-
 	for _, h := range Handlers {
 		h.Init(l, cfg)
 	}

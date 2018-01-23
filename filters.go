@@ -212,6 +212,15 @@ func (h *filterHnd) UploadFilters(dir string) (ch chan DLState) {
 	return
 }
 
+func init() {
+	Handlers = append(
+		Handlers,
+		&ULFHandler{},
+		&DLFHandler{},
+		&ImportHandler{},
+	)
+}
+
 type DLFHandler struct {
 	AbstractHandler
 	h *filterHnd

@@ -15,6 +15,11 @@ func init() {
 	reGithubExeURL = regexp.MustCompile(
 		`/download/[a-zA-Z0-9./-]+\.exe`,
 	)
+
+	Handlers = append(
+		Handlers,
+		&UncapHandler{},
+		&RecapHandler{})
 }
 
 func fetchUncapURL() (uri string, err error) {
