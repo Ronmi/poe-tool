@@ -55,7 +55,7 @@ func (h *TMHandler) installAHK() (ok bool) {
 		if s, _, err := k.GetStringValue("InstallDir"); err == nil {
 			h.ahkPath = s
 			h.l.Logf(L("ahk_path"), s)
-			return
+			return true
 		}
 	}
 
