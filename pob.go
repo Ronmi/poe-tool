@@ -5,7 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"regexp"
 )
 
 func fetchPoBURL() (uri string, err error) {
@@ -48,19 +50,37 @@ func InstallPoB() (err error) {
 	return
 }
 
+var reGithubURL *regexp.Regexp
+
+func init() {
+	reGithubURL = regexp.MustCompile(
+		`/download/[a-zA-Z0-9./-]+\.zip`,
+	)
+
+	Handlers = append(Handlers, &POBHandler{})
+}
+
 type POBHandler struct {
 	AbstractHandler
 }
 
 func (h *POBHandler) Handle(data interface{}) {
-	h.l.Log(L("dling_pob"))
 	go func() {
-		err := InstallPoB()
-		if err != nil {
-			h.l.Log(LErr(err))
-		} else {
+		fn := filepath.Join("PathOfBuilding", "Path of Building.exe")
+		h.l.Log(L("detect_pob"))
+		if _, err := os.Stat(fn); err != nil {
+			h.l.Log(L("dling_pob"))
+			err := InstallPoB()
+			if err != nil {
+				h.l.Log(L("err_dl_pob"))
+				return
+			}
+
 			h.l.Log(L("finish_pob"))
 		}
+
+		exec.Command(fn).Start()
+		h.l.Log(L("pob_executed"))
 	}()
 }
 

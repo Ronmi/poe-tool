@@ -20,6 +20,15 @@
   revision = "27f8bc89d917246e22d64a5992ac5688878b6435"
 
 [[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = [
+    "windows",
+    "windows/registry"
+  ]
+  revision = "af50095a40f9041b3b38960738837185c26e9419"
+
+[[projects]]
   branch = "v2"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
@@ -28,6 +37,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ed8a8bc614e2f5fab5258c8cfab3465a94c2bf6e2c622aca14b6f72f95073a76"
+  inputs-digest = "26700c007816dd1e0f19cb9158a7b7e9dc7640c93bbad25993dccad20173e217"
   solver-name = "gps-cdcl"
   solver-version = 1
