@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"io/ioutil"
+	"log"
 	"os/user"
 	"path"
 	"path/filepath"
@@ -60,6 +61,7 @@ func FilterHnd(cfg *ConfigFile) *filterHnd {
 		}
 
 		ret.UserKey = k
+		cfg.UserKey = k
 	}
 
 	return ret
@@ -86,6 +88,7 @@ func (h *filterHnd) listRemoteFilters() (ret []remote, err error) {
 
 	ret = make([]remote, 0)
 	for _, f := range files {
+		log.Printf("%+v", f)
 		if !strings.HasSuffix(f.Title, filterSuffix) {
 			continue
 		}
