@@ -24,11 +24,12 @@ func (h *LaunchHandler) Init(l Logger, cfg *ConfigFile) {
 		// not installed, disable it
 		h.GetObject().SetSensitive(false)
 		h.l.Log(L("not_installed"))
+		return
 	}
 
 	s, _, err := k.GetStringValue("InstallLocation")
 	if err != nil {
-		h.l.Logf(L("not_installed"), s)
+		h.l.Log(L("not_installed"))
 		return
 	}
 	h.prog = s
