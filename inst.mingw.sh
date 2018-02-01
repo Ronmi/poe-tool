@@ -1,7 +1,8 @@
 #!/bin/bash
 
+mkdir -p /go
 export GOROOT=/mingw64/lib/go
-export GOPATH=/mingw64
+export GOPATH=/go
 export PATH="$PATH:/mingw64/bin"
 export PKG_CONFIG_PATH=/mingw64/lib/pkgconfig
 

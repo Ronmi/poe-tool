@@ -59,9 +59,9 @@ password: "你的 pastebin 密碼"
 
 * 下載並安裝 [MSYS2](http://www.msys2.org/)，使用預設的設定就好
 * 安裝好之後，應該會有一個類似命令提示字元的黑色視窗跑出來
-* 在那個黑視窗裡輸入 `/mingw64/mingw64 bash -c "curl -sSL https://raw.githubusercontent.com/Ronmi/poe-tool/master/inst.mingw.sh|bash"` 然後按 enter 執行
+* 在那個黑視窗裡輸入 `/mingw64.exe bash -c "curl -sSL https://raw.githubusercontent.com/Ronmi/poe-tool/master/inst.mingw.sh|bash"` 然後按 enter 執行
 * 慢慢等
-* 把 `C:\msys2\mingw64\bin` 這個資料夾裡的所有 DLL 檔和 `poe-tool.exe` 備份到其他位置
+* 把 `C:\msys2\go\bin\poe-tool.exe` 和 `C:\msys2\mingw64\bin` 這個資料夾裡的所有 DLL 檔備份到其他位置
 * 現在可以把 MSYS2 移除來節省你的硬碟空間
 
 ### 執行
