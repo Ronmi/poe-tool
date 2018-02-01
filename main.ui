@@ -141,6 +141,45 @@
                 <property name="top_attach">2</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="btn_upload_cfg">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_upload_cfg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_download_cfg">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_download_cfg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_launch">
+                <property name="label" translatable="yes">button</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_launch" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
