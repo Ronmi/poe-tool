@@ -37,28 +37,31 @@ type filterHnd struct {
 	api     *pastebin.API
 }
 
+var hnd *filterHnd
+
 func FilterHnd(cfg *ConfigFile) *filterHnd {
-	ret := &filterHnd{
-		DevKey:  cfg.DevKey,
-		UserKey: cfg.UserKey,
-		api:     &pastebin.API{Key: cfg.DevKey},
-	}
-
-	if ret.UserKey == "" {
-		if cfg.Username == "" || cfg.Password == "" {
-			panic(errors.New("you must provide pastebin username/password or user key"))
+	if hnd == nil {
+		hnd = &filterHnd{
+			DevKey:  cfg.DevKey,
+			UserKey: cfg.UserKey,
+			api:     &pastebin.API{Key: cfg.DevKey},
 		}
 
-		k, err := ret.api.UserKey(cfg.Username, cfg.Password)
-		if err != nil {
-			panic(err)
-		}
+		if hnd.UserKey == "" {
+			if cfg.Username == "" || cfg.Password == "" {
+				panic(errors.New("you must provide pastebin username/password or user key"))
+			}
 
-		ret.UserKey = k
-		cfg.UserKey = k
+			k, err := hnd.api.UserKey(cfg.Username, cfg.Password)
+			if err != nil {
+				panic(err)
+			}
+
+			hnd.UserKey = k
+		}
 	}
 
-	return ret
+	return hnd
 }
 
 func (h *filterHnd) rmRemoteFile(key string) (err error) {

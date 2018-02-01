@@ -7,11 +7,20 @@ import (
 )
 
 type ConfigFile struct {
-	DevKey   string
-	UserKey  string
-	Username string
-	Password string
-	Locale   string
+	DevKey   string `yaml:"devkey,omitempty"`
+	UserKey  string `yaml:"userkey,omitempty"`
+	Username string `yaml:"username,omitempty"`
+	Password string `yaml:"password,omitempty"`
+	Locale   string `yaml:"locale,omitempty"`
+}
+
+func (c *ConfigFile) Save() (err error) {
+	data, err := yaml.Marshal(c)
+	if err != nil {
+		return
+	}
+
+	return ioutil.WriteFile("poe-tool.yml", data, 0600)
 }
 
 func loadConfig() *ConfigFile {

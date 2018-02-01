@@ -37,6 +37,7 @@ var lang = map[string]map[string]string{
 		"remote_filter_404":          "找不到之前上傳的過濾器",
 		"cannot_get_user_dir":        "找不到過濾器的目錄!?",
 		"ask_pastebin_key":           "你必須提供 Pastebin 的 API Key 才能使用過濾器上傳下載功能",
+		"failed_update_cfg":          "更新設定檔失敗，請自行手動更新",
 		"not_implemented":            "目前尚未提供此功能"},
 	"en": map[string]string{
 		"":                           "Unexpected error: ",
@@ -72,6 +73,7 @@ var lang = map[string]map[string]string{
 		"remote_filter_404":          "No filters found on pastebin",
 		"cannot_get_user_dir":        "No filters found!?",
 		"ask_pastebin_key":           "You have to provide Pastebin API Keys to upload/download item filters",
+		"failed_update_cfg":          "Failed to update config file. You have to update it manually",
 		"not_implemented":            "This feature is not implemented yet",
 	},
 }
