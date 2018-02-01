@@ -41,7 +41,7 @@ If you are brave enough, use paste account and password, let `poe-tool` allocate
 
 ```yaml
 devkey: "your dev key"
-account: "your pastebin account"
+username: "your pastebin account"
 password: "your pastebin password"
 ```
 
@@ -49,7 +49,7 @@ All supported configuration items:
 
 - `devkey`: pastebin dev key.
 - `userkey`: pasetbin user key. It has precedence over `account` and `password`.
-- `account`: pastebin account name.
+- `username`: pastebin account name.
 - `password`: pastebin password.
 - `locale`: language selection. Currently only `tw` and `en` are supported. Default to `tw`.
 

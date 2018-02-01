@@ -47,7 +47,7 @@ password: "你的 pastebin 密碼"
 
 - `devkey`: pastebin dev key
 - `userkey`: pasetbin user key。 有設定 userkey 的時候就不會使用 `account` 和 `password`
-- `account`: pastebin 帳號
+- `username`: pastebin 帳號
 - `password`: pastebin 密碼
 - `locale`: 選擇語言。目前只支援 `tw` 和 `en`，預設是 `tw`
 
