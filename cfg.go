@@ -25,5 +25,9 @@ func loadConfig() *ConfigFile {
 		panic(err)
 	}
 
+	if cfg.Locale == "tw" || cfg.Locale == "en" {
+		locale = cfg.Locale
+	}
+
 	return &cfg
 }
