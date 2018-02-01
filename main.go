@@ -15,6 +15,7 @@ func main() {
 
 	b := builder()
 	w := window(b)
+	defer w.Destroy()
 	l := initLogger(b)
 
 	initAction(l, cfg)
