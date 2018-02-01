@@ -17,13 +17,7 @@ func switchLocale(lang string) {
 	}
 }
 
-func initAction(l Logger, cfg *ConfigFile) {
-	for _, h := range Handlers {
-		h.Init(l, cfg)
-	}
-}
-
-func setActionBtn(b *gtk.Builder) (signals map[string]interface{}) {
+func setActionBtn(b *gtk.Builder, l Logger, cfg *ConfigFile) (signals map[string]interface{}) {
 	signals = make(map[string]interface{})
 	for _, x := range Handlers {
 		obj, err := b.GetObject(x.Key())
@@ -37,6 +31,7 @@ func setActionBtn(b *gtk.Builder) (signals map[string]interface{}) {
 		}
 
 		x.SetObject(btn)
+		x.Init(l, cfg)
 		UpdateText(x)
 		signals[x.Key()] = x.Handle
 	}

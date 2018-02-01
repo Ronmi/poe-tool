@@ -16,6 +16,7 @@ var lang = map[string]map[string]string{
 		"btn_import_filter":          "下載指定的過濾器",
 		"btn_upload_cfg":             "上傳遊戲設定檔",
 		"btn_download_cfg":           "下載遊戲設定檔",
+		"btn_launch":                 "啟動遊戲",
 		"detect_ahk":                 "偵測系統是否已安裝 AutoHotkey",
 		"ahk_path":                   "AutoHotkey 已安裝在 %s",
 		"try_dl_ahk":                 "嘗試下載 AutoHotkey...",
@@ -43,6 +44,7 @@ var lang = map[string]map[string]string{
 		"done_ul_gamecfg":            "遊戲設定檔上傳成功",
 		"done_dl_gamecfg":            "遊戲設定檔下載成功",
 		"remote_gamecfg_404":         "找不到之前上傳的遊戲設定檔",
+		"not_installed":              "找不到遊戲主程式",
 		"not_implemented":            "目前尚未提供此功能"},
 	"en": map[string]string{
 		"":                           "Unexpected error: ",
@@ -57,6 +59,7 @@ var lang = map[string]map[string]string{
 		"btn_import_filter":          "Import from pastebin URL",
 		"btn_upload_cfg":             "Upload game config",
 		"btn_download_cfg":           "Download game config",
+		"btn_launch":                 "Lauch the game",
 		"detect_ahk":                 "Detecting if AutoHotkey is installed",
 		"ahk_path":                   "AutoHotkey is installed in %s",
 		"try_dl_ahk":                 "Downloading AutoHotkey...",
@@ -84,6 +87,7 @@ var lang = map[string]map[string]string{
 		"done_ul_gamecfg":            "Game config file uploaded successfully",
 		"done_dl_gamecfg":            "Game config file uploaded successfully",
 		"remote_gamecfg_404":         "No game config found on pastebin",
+		"not_installed":              "Cannot found game program",
 		"not_implemented":            "This feature is not implemented yet",
 	},
 }
