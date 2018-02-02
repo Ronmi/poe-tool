@@ -31,7 +31,7 @@ func (h *LaunchHandler) Init(c buttonInitParam) {
 	}
 
 	k, err := registry.OpenKey(
-		registry.LOCAL_MACHINE,
+		registry.CURRENT_USER,
 		`Software\GrindingGearGames\Path of Exile`,
 		registry.QUERY_VALUE)
 	if err != nil {
@@ -44,9 +44,10 @@ func (h *LaunchHandler) Init(c buttonInitParam) {
 		h.l.Log(L("not_installed"))
 		return
 	}
-	s += `\PathOfExile_x64.exe`
+	s = filepath.Join(s, "PathOfExile_x64.exe")
 
 	h.prog, c.cfg.GameProg = s, s
+	c.cfg.Save()
 }
 
 func (h *LaunchHandler) Handle(data interface{}) {
