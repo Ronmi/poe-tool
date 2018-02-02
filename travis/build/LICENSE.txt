@@ -1,0 +1,9 @@
+poe-tool.exe is free/libre/open-source software, released under WTFPL.
+
+Other files, including DLL files and icons, are part of GNU/GTK/Gnome,
+released under GNU GPL. You may get the source files from their
+official website:
+
+https://www.gnu.org
+https://www.gtk.org
+https://www.gnome.org

@@ -14,6 +14,7 @@ addons:
     - libgtk2.0-dev
     - mingw-w64
     - mingw-w64-tools
+    - gnome-themes-standard-data
 
 install:
 - go get github.com/golang/dep/cmd/dep

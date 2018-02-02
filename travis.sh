@@ -42,6 +42,8 @@ then
     exit 0
 fi
 
+set -e
+
 sed -i "s#prefix=/mingw64#prefix=${dir}/mingw64#" travis/mingw64/lib/pkgconfig/*.pc
 
 go build -v -ldflags="-H=windowsgui"
@@ -65,10 +67,11 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
-# schemas
+# schemas and icons
 schemas="glib-2.0/schemas"
-mkdir -p "${deploy}/${schemas}"
-cp "${dir}/mingw64/share/${schemas}/gschemas.compiled" "${deploy}/${schemas}/"
+mkdir -p "${deploy}/${schemas}" "${deploy}/icons"
+cp "/usr/share/${schemas}/gschemas.compiled" "${deploy}/${schemas}/"
+cp -r "/usr/share/icons/Adwaita" "${deploy}/icons/"
 
 tar czf poe-tool.tar.gz poe-tool.exe
 tar czf resources.tar.gz -C "$deploy" --exclude=.gitignore .
