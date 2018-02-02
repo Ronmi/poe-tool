@@ -87,11 +87,14 @@ func (h *LaunchHandler) askProg() {
 
 	go func() {
 		defer dlg.Destroy()
-		if resp := dlg.Run(); resp == int(gtk.RESPONSE_CANCEL) {
+		if resp := dlg.Run(); resp != int(gtk.RESPONSE_OK) {
 			return
 		}
 
 		h.prog = dlg.GetFilename()
+		if h.prog == "" {
+			return
+		}
 		h.cfg.GameProg = h.prog
 		h.cfg.Save()
 		h.Handle(nil)
