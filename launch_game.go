@@ -3,11 +3,19 @@
 package main
 
 import (
+	"os"
 	"os/exec"
+	"path/filepath"
 
 	"github.com/gotk3/gotk3/gtk"
 	"golang.org/x/sys/windows/registry"
 )
+
+func init() {
+	// forcing schema souces
+	p, _ := filepath.Abs(".")
+	os.Setenv("XDG_DATA_DIRS", p)
+}
 
 type LaunchHandler struct {
 	AbstractHandler

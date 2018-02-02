@@ -65,5 +65,10 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
+# schemas
+schemas="glib-2.0/schemas"
+mkdir -p "${deploy}/${schemas}"
+cp "${dir}/mingw64/share/${schemas}/gschemas.compiled" "${deploy}/${schemas}/"
+
 tar czf poe-tool.tar.gz poe-tool.exe
 tar czf resources.tar.gz -C "$deploy" --exclude=.gitignore .
