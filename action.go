@@ -4,23 +4,31 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 )
 
+type buttonInitParam struct {
+	l   Logger
+	cfg *ConfigFile
+	w   *gtk.Window
+}
+
 type ButtonHandler interface {
 	Handle(evtData interface{})
 	Key() string
-	Init(l Logger, cfg *ConfigFile)
+	Init(buttonInitParam)
 	SetObject(btn *gtk.Button)
 	GetObject() *gtk.Button
 }
 
 type AbstractHandler struct {
-	cfg *ConfigFile
-	l   Logger
-	btn *gtk.Button
+	cfg  *ConfigFile
+	l    Logger
+	btn  *gtk.Button
+	root *gtk.Window
 }
 
-func (h *AbstractHandler) Init(l Logger, cfg *ConfigFile) {
-	h.l = l
-	h.cfg = cfg
+func (h *AbstractHandler) Init(c buttonInitParam) {
+	h.l = c.l
+	h.cfg = c.cfg
+	h.root = c.w
 }
 
 func (h *AbstractHandler) SetObject(btn *gtk.Button) {

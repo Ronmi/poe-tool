@@ -18,7 +18,11 @@ func main() {
 	defer w.Destroy()
 	l := initLogger(b)
 
-	b.ConnectSignals(setActionBtn(b, l, cfg))
+	b.ConnectSignals(setActionBtn(b, buttonInitParam{
+		l:   l,
+		cfg: cfg,
+		w:   w,
+	}))
 
 	w.SetDefaultSize(600, 400)
 	w.Connect("destroy", gtk.MainQuit)

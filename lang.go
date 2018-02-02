@@ -45,6 +45,9 @@ var lang = map[string]map[string]string{
 		"done_dl_gamecfg":            "遊戲設定檔下載成功",
 		"remote_gamecfg_404":         "找不到之前上傳的遊戲設定檔",
 		"not_installed":              "找不到遊戲主程式",
+		"choose_game_prog":           "選擇 PoE 主程式",
+		"ok":                         "確定",
+		"cancel":                     "取消",
 		"not_implemented":            "目前尚未提供此功能"},
 	"en": map[string]string{
 		"":                           "Unexpected error: ",
@@ -88,6 +91,9 @@ var lang = map[string]map[string]string{
 		"done_dl_gamecfg":            "Game config file uploaded successfully",
 		"remote_gamecfg_404":         "No game config found on pastebin",
 		"not_installed":              "Cannot found game program",
+		"choose_game_prog":           "Choose Game program",
+		"ok":                         "Ok",
+		"cancel":                     "Cancel",
 		"not_implemented":            "This feature is not implemented yet",
 	},
 }

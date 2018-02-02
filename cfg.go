@@ -12,6 +12,7 @@ type ConfigFile struct {
 	Username string `yaml:"username,omitempty"`
 	Password string `yaml:"password,omitempty"`
 	Locale   string `yaml:"locale,omitempty"`
+	GameProg string `yaml:"gameprog,omitempty"`
 }
 
 func (c *ConfigFile) Save() (err error) {

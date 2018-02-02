@@ -172,9 +172,9 @@ type DLFHandler struct {
 	h *filterHnd
 }
 
-func (h *DLFHandler) Init(l Logger, cfg *ConfigFile) {
-	h.AbstractHandler.Init(l, cfg)
-	h.h = FilterHnd(cfg)
+func (h *DLFHandler) Init(c buttonInitParam) {
+	h.AbstractHandler.Init(c)
+	h.h = FilterHnd(c.cfg)
 }
 
 func (h *DLFHandler) Handle(data interface{}) {
@@ -201,9 +201,9 @@ type ULFHandler struct {
 	h *filterHnd
 }
 
-func (h *ULFHandler) Init(l Logger, cfg *ConfigFile) {
-	h.AbstractHandler.Init(l, cfg)
-	h.h = FilterHnd(cfg)
+func (h *ULFHandler) Init(c buttonInitParam) {
+	h.AbstractHandler.Init(c)
+	h.h = FilterHnd(c.cfg)
 }
 
 func (h *ULFHandler) Handle(data interface{}) {
@@ -219,9 +219,9 @@ type ImportHandler struct {
 	h *filterHnd
 }
 
-func (h *ImportHandler) Init(l Logger, cfg *ConfigFile) {
-	h.AbstractHandler.Init(l, cfg)
-	h.h = FilterHnd(cfg)
+func (h *ImportHandler) Init(c buttonInitParam) {
+	h.AbstractHandler.Init(c)
+	h.h = FilterHnd(c.cfg)
 }
 
 func (h *ImportHandler) Handle(data interface{}) {
