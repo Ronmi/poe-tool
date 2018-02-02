@@ -67,10 +67,8 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
-# schemas and icons
-schemas="glib-2.0/schemas"
-mkdir -p "${deploy}/${schemas}" "${deploy}/icons"
-cp "/usr/share/${schemas}/gschemas.compiled" "${deploy}/${schemas}/"
+# icons
+mkdir -p "${deploy}/icons"
 cp -r "/usr/share/icons/Adwaita" "${deploy}/icons/"
 
 tar czf poe-tool.tar.gz poe-tool.exe
