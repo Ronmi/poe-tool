@@ -44,6 +44,7 @@ func (h *LaunchHandler) Init(c buttonInitParam) {
 		h.l.Log(L("not_installed"))
 		return
 	}
+	s += `\PathOfExile_x64.exe`
 
 	h.prog, c.cfg.GameProg = s, s
 }
@@ -68,6 +69,7 @@ func (h *LaunchHandler) askProg() {
 		return
 	}
 	f.AddPattern("*.exe")
+	f.SetName(L("filter_exe"))
 
 	dlg, err := gtk.FileChooserDialogNewWith2Buttons(
 		L("choose_game_prog"),

@@ -46,6 +46,7 @@ var lang = map[string]map[string]string{
 		"remote_gamecfg_404":         "找不到之前上傳的遊戲設定檔",
 		"not_installed":              "找不到遊戲主程式",
 		"choose_game_prog":           "選擇 PoE 主程式",
+		"filter_exe":                 "可執行檔 (*.exe)",
 		"ok":                         "確定",
 		"cancel":                     "取消",
 		"not_implemented":            "目前尚未提供此功能"},
@@ -94,6 +95,7 @@ var lang = map[string]map[string]string{
 		"choose_game_prog":           "Choose Game program",
 		"ok":                         "Ok",
 		"cancel":                     "Cancel",
+		"filter_exe":                 "Executable (*.exe)",
 		"not_implemented":            "This feature is not implemented yet",
 	},
 }
