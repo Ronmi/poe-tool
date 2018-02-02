@@ -118,6 +118,7 @@ func (d *downloader) read(t *tar.Reader, h *tar.Header) (err error) {
 		failULDL(d.L, h.Name, err)
 		return
 	}
+	defer f.Close()
 
 	_, err = io.Copy(f, t)
 	if err != nil {
