@@ -67,9 +67,5 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
-# icons
-mkdir -p "${deploy}/icons"
-cp -r "/usr/share/icons/Adwaita" "${deploy}/icons/"
-
 tar czf poe-tool.tar.gz poe-tool.exe
 tar czf resources.tar.gz -C "$deploy" --exclude=.gitignore .
