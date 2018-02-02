@@ -17,8 +17,8 @@ type LaunchHandler struct {
 func (h *LaunchHandler) Init(c buttonInitParam) {
 	h.AbstractHandler.Init(c)
 
-	if cfg.GameProg != "" {
-		h.prog = cfg.GameProg
+	if c.cfg.GameProg != "" {
+		h.prog = c.cfg.GameProg
 		return
 	}
 
@@ -37,7 +37,7 @@ func (h *LaunchHandler) Init(c buttonInitParam) {
 		return
 	}
 
-	h.prog, cfg.GameProg = s, s
+	h.prog, c.cfg.GameProg = s, s
 }
 
 func (h *LaunchHandler) Handle(data interface{}) {
@@ -61,7 +61,7 @@ func (h *LaunchHandler) askProg() {
 	}
 	f.AddPattern("*.exe")
 
-	dlg, err := gtk.FileChooserDialogNewWith2Button(
+	dlg, err := gtk.FileChooserDialogNewWith2Buttons(
 		L("choose_game_prog"),
 		h.root,
 		gtk.FILE_CHOOSER_ACTION_OPEN,
@@ -84,8 +84,8 @@ func (h *LaunchHandler) askProg() {
 		}
 
 		h.prog = dlg.GetFilename()
-		cfg.GameProg = h.prog
-		cfg.Save()
+		h.cfg.GameProg = h.prog
+		h.cfg.Save()
 		h.Handle(nil)
 	}()
 }
