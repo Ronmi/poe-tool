@@ -2,7 +2,9 @@ package main
 
 import (
 	"io/ioutil"
+	"log"
 
+	"github.com/Ronmi/pastebin"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -32,7 +34,17 @@ func loadConfig() *ConfigFile {
 
 	var cfg ConfigFile
 	if err := yaml.Unmarshal(data, &cfg); err != nil {
-		panic(err)
+		log.Fatal(err)
+	}
+
+	if cfg.DevKey == "" && cfg.Username != "" && cfg.Password != "" {
+		devkey, err := pastebin.GetDevKey(cfg.Username, cfg.Password, nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		cfg.DevKey = devkey
+		cfg.Save()
 	}
 
 	if cfg.Locale == "tw" || cfg.Locale == "en" {
