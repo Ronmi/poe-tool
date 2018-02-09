@@ -60,6 +60,11 @@ func (h *filterHnd) UploadConfig(l Logger) {
 		return
 	}
 
+	// remove remote config if exists
+	if key, err := h.findRemoteConfig(); key != "" && err == nil {
+		h.api.Delete(h.UserKey, key)
+	}
+
 	p := &pastebin.Paste{
 		Title:   intlCfgName,
 		Content: data.String(),
