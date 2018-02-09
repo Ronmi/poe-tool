@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/Ronmi/pastebin"
   packages = ["."]
-  revision = "b596929536482b5b2a4136034e13e98493459887"
+  revision = "c677cc16dbd7f9e2a52e114392ced784f01e5ef0"
 
 [[projects]]
   branch = "master"
@@ -17,7 +17,7 @@
     "gtk",
     "pango"
   ]
-  revision = "27f8bc89d917246e22d64a5992ac5688878b6435"
+  revision = "3b3b480e7ea8a59edabbde8a8a8135ac00f010ba"
 
 [[projects]]
   branch = "master"
@@ -26,7 +26,7 @@
     "windows",
     "windows/registry"
   ]
-  revision = "af50095a40f9041b3b38960738837185c26e9419"
+  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
 
 [[projects]]
   branch = "v2"
