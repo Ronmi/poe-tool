@@ -69,7 +69,21 @@ func (h *TMHandler) installAHK() (ok bool) {
 
 	h.l.Log(L("inst_ahk"))
 	exec.Command(fn).Run()
-	return true
+
+	k, err = registry.OpenKey(
+		registry.LOCAL_MACHINE,
+		`SOFTWARE\AutoHotkey`,
+		registry.QUERY_VALUE)
+	if err == nil {
+		if s, _, err := k.GetStringValue("InstallDir"); err == nil {
+			h.ahkPath = s
+			h.l.Logf(L("ahk_path"), s)
+			return true
+		}
+	}
+
+	h.l.Log(L("err_dl_ahk"))
+	return false
 }
 
 func (h *TMHandler) InstallTradeMacro() {
