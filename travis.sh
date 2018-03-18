@@ -67,5 +67,6 @@ do
     cp "${dir}/mingw64/bin/${x}" "$deploy"
 done
 
-tar czf poe-tool.tar.gz poe-tool.exe
-tar czf resources.tar.gz -C "$deploy" --exclude=.gitignore .
+tar czf executable.tar.gz poe-tool.exe
+cp poe-tool.exe "$deploy/"
+tar czf full.tar.gz -C "$deploy" --exclude=.gitignore .

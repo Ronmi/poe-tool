@@ -32,8 +32,8 @@ deploy:
   api_key:
     secure: 0CiX39pWJ+CBkwCyxpfMgXfScmgujDH/aMsVIGCyqwc0OE8xgO8VzcSEMwGLpouH8mZ8dWjMU4ReHLdhwIGzPtERB6cYcHADASe0s6gZCgebO8U3sAxeWVpNVBHk7K3iJak8VHh0k6mBjGtv5ZB+izNmX/sZAPpY2iw7HF1PhT6Anpq/sJuOlL1aHz2J3a0Oh+k+z5lbELtfENMsCgOBobe9Htt4aw0z/2ouWO5rLa8tF9j8PdAj4rJRdfDf4XKT7vkURpoq2rz8w1SYrrnKaHjggEGg4gpHGjAtZITQ0g2lzOexn2gn+QtEgls1sNgQi/g72sfTFS8vXtjm7r+YfN5MyJ6RajU+4Z4wMS2QfMflEaF0kElCTfD0LdNchS91F0Ygqi+IqfRzTMznO47CfBVWaZYrElDs/GoR0K1yBo5VqpU8lQQ8jHHXVoh4YebDf/p4kXc0xvdnJkElRMvPdMd9/bEkboH53HuEq5e/e7bA4ubE1K1BYcwv8kjnX93MpLWp+tS6mjYlkArbXOPKdzHvWFn2oU5twEEN/ane+VJImoc5BMitF1zb0MF+wPYonHzl2RoJkPI4IPqGueKahRX7Y15sCQs2S8XRVHww7WndMB2wkw3IJhH4RjjEwgtSEcdBTBFpKsDmaJRfTU7L8uXP8DXV9eRbDeSqUUeF8bU=
   file:
-  - "poe-tool.tar.gz"
-  - "resources.tar.gz"
+  - "executable.tar.gz"
+  - "full.tar.gz"
   skip_cleanup: true
   on:
     repo: Ronmi/poe-tool
